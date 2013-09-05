@@ -9,12 +9,11 @@
 __author__ = 'Takashi Someda <someda@nulab-inc.com>'
 
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.keys import Keys
-import time
-
 import pytest
+
+import time
 import os
+
 
 @pytest.fixture(scope='module')
 def driver(request):
