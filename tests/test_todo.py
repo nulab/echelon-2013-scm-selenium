@@ -14,19 +14,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 import pytest
-
-#browser = webdriver.Firefox() # Get local session of firefox
-#browser.get("http://www.yahoo.com") # Load page
-#assert "Yahoo!" in browser.title
-#elem = browser.find_element_by_name("p") # Find the query box
-#elem.send_keys("seleniumhq" + Keys.RETURN)
-#time.sleep(0.2) # Let the page load, will be added to the API
-#try:
-#    browser.find_element_by_xpath("//a[contains(@href,'http://seleniumhq.org')]")
-#except NoSuchElementException:
-#    assert 0, "can't find seleniumhq"
-#browser.close()
-
+import os
 
 @pytest.fixture(scope='module')
 def driver(request):
@@ -40,7 +28,7 @@ def driver(request):
 
 def test_todo1(driver):
 
-    driver.get('http://localhost:5000/todo')
+    driver.get(host() + '/todo')
 
     assert 'Todo' in driver.title
 
@@ -58,3 +46,7 @@ def test_todo1(driver):
 
     added_summary = driver.find_element_by_xpath("//span[text()='%s']" % send_data)
     assert added_summary is not None
+
+
+def host():
+    return os.getenv('SELENIUM_TARGET_HOST', 'http://localhost:5000')
